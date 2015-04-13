@@ -25,7 +25,7 @@ SECRET_KEY = '*8oo9y%20ob=)r&&aw$wti5$@=--c(v$a0ww#=tpu8hf2bj&d4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,12 +76,17 @@ WSGI_APPLICATION = 'onheroku.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['TODO_APP_DEV_DATABASE']
+        'USER': os.environ['TODO_APP_DEV_USER']
+        'PASSWORD': os.environ['TODO_APP_DEV_PASSWORD']
+        'HOST': os.environ['TODO_APP_DEV_HOST'],
+        'PORT': os.environ['TODO_APP_DEV_PORT'],
     }
 }
-
-
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -98,5 +103,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+STATIC_ROOT = ''
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+	    os.path.join(BASE_DIR, '/static'),
+	)
