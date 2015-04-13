@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'onheroku.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['TODO_APP_DEV_DATABASE']
-        'USER': os.environ['TODO_APP_DEV_USER']
-        'PASSWORD': os.environ['TODO_APP_DEV_PASSWORD']
+        'NAME': os.environ['TODO_APP_DEV_DATABASE'],
+        'USER': os.environ['TODO_APP_DEV_USER'],
+        'PASSWORD': os.environ['TODO_APP_DEV_PASSWORD'],
         'HOST': os.environ['TODO_APP_DEV_HOST'],
         'PORT': os.environ['TODO_APP_DEV_PORT'],
     }
